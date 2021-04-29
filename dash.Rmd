@@ -17,6 +17,16 @@ library(tidyr)
 library(DT)
 
 
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Distribution of Months
+
+```{r}
+
 omplains<- readRDS("complaints.rds")
 complains
 #
@@ -55,14 +65,6 @@ countoct <- count(Oct)
 countnov <- count(Nov)
 countdec <- count(Dec)
 
-```
-
-Column {data-width=650}
------------------------------------------------------------------------
-
-### Distribution of Months
-
-```{r}
 
 barplot(countmar,countapr,countmay,countjun,countjul,countaug,countsep,countoct,countnov,countdec)
 
@@ -72,10 +74,16 @@ barplot(countmar,countapr,countmay,countjun,countjul,countaug,countsep,countoct,
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Distributions of states
 
 ```{r}
-hello
+comp %>% 
+  select(state)
+
+countstate <-comp %>% 
+  count(state)
+
+barplot(countstate)
 ```
 
 ### Chart C
