@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "CFPB dash"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -8,14 +8,64 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(glue)
+library(plotly)
+library(tidyr)
+library(DT)
+
+
+omplains<- readRDS("complaints.rds")
+complains
+#
+
+comp <- separate(complains,date_received,c("Year", "Month","Day"), sep = "-")
+comp
+Mar<- comp %>% 
+  filter(Month == "03")
+Apr <- comp %>% 
+  filter(Month == "04")
+May <- comp %>% 
+  filter(Month == "05")
+Jun <- comp %>% 
+  filter(Month == "06")
+Jul <- comp %>% 
+  filter(Month == "07")
+Aug <- comp %>% 
+  filter(Month == "08")
+Sep <- comp %>% 
+  filter(Month == "09")
+Oct <- comp %>% 
+  filter(Month == "10")
+Nov <- comp %>% 
+  filter(Month == "11")
+Dec <- comp %>% 
+  filter(Month == "12")
+
+countmar <- count(Mar)
+countapr <- count(Apr)
+countmay <- count(May)
+countjun <- count(Jun)
+countjul <- count(Jul)
+countaug <- count(Aug)
+countsep <- count(Sep)
+countoct <- count(Oct)
+countnov <- count(Nov)
+countdec <- count(Dec)
+
 ```
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Distribution of Months
 
 ```{r}
+
+barplot(countmar,countapr,countmay,countjun,countjul,countaug,countsep,countoct,countnov,countdec)
+
 
 ```
 
@@ -25,7 +75,7 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-
+hello
 ```
 
 ### Chart C
