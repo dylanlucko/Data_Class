@@ -23,11 +23,10 @@ library(DT)
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Distribution of Months
+### Distribution of Months; DEC saw the most claims
 
 ```{r}
-
-omplains<- readRDS("complaints.rds")
+complains<- readRDS("complaints.rds")
 complains
 #
 
@@ -64,9 +63,7 @@ countsep <- count(Sep)
 countoct <- count(Oct)
 countnov <- count(Nov)
 countdec <- count(Dec)
-
-
-barplot(countmar,countapr,countmay,countjun,countjul,countaug,countsep,countoct,countnov,countdec)
+thetable<- table(c(countmar,countapr, countmay, countjun, countjul, countaug, countsep, countnov, countdec))
 
 
 ```
@@ -74,7 +71,7 @@ barplot(countmar,countapr,countmay,countjun,countjul,countaug,countsep,countoct,
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Distributions of states
+### Distributions of states; FL had the most
 
 ```{r}
 comp %>% 
@@ -82,13 +79,20 @@ comp %>%
 
 countstate <-comp %>% 
   count(state)
-
-barplot(countstate)
 ```
 
-### Chart C
+### Responses; most were closed with an explanation; fewest colsed with monetary relief
 
 ```{r}
+expl<- comp %>% 
+  filter(company_response_to_consumer=="Closed with explanation")
+count<-expl
+nomoney<- comp %>% 
+  filter(company_response_to_consumer=="Closed with non-monetary relief")
+count<-nomoney
+yesmoney<- comp %>% 
+  filter(company_response_to_consumer=="Closed with monetary relief")
+count<-yesmoney
 
 ```
 
